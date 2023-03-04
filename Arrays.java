@@ -9,11 +9,11 @@ public class Arrays {
     public static void displayMenu(int options[], String features[]) {
         System.out.println("M E N U");
         System.out.println("====================================");
-        //Loop through options and features
+        // loop through options and features
         for (int i = 0; i < options.length; i++) {
             System.out.printf("%d. %s\n", options[i], features[i]);
         }
-        //Print the exit option
+        // print the exit option
         System.out.printf("%d. Exit\n",options.length + 1);
         System.out.println("====================================");
         System.out.print("Enter choice: ");
@@ -38,6 +38,7 @@ public class Arrays {
     }
     public static void main(String[] args) {
         int choice;
+        //options and features of menu choices
         int options[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         String features[] = {"countNegatives", "countEvens", "divArray", "min", "isAscSorted", "length", "median", "compare", "freq"};
         
@@ -45,7 +46,7 @@ public class Arrays {
         inputArrays();
         displayMenu(options, features);
         choice = sc.nextInt();
-        //Loop the choices
+        //loop the choices
         while (choice != EXIT) {
             switch (choice) {
                 case 1:
@@ -117,19 +118,23 @@ public class Arrays {
     public static void divArray(int[] userArray) {
         System.out.print("Enter a number to divide: ");
         int div = sc.nextInt();
+        //loop through all elements and divide them
         for (int i = 0; i < userArray.length; i++) {
             System.out.print(userArray[i] / div + " ");
         }
     }
 
     public static void min(int[] userArray) {
+        //sort the userArray in ascending order then take the first element
         java.util.Arrays.sort(userArray);
         System.out.println("The minimum element is: " + userArray[0]);
     }
 
     public static void isAscSorted(int[] userArray) {
+        //initialize a temporary array to hold the sorted version of userArray
         int[] temp = userArray;
         java.util.Arrays.sort(userArray);
+        //compare 2 array to see if userArray is in ascending order
         if (temp == userArray) {
             System.out.println("In ascending order!");
         } else {System.out.println("Not in ascending order!");}
@@ -151,21 +156,42 @@ public class Arrays {
     public static void compare(int[] userArray) {
         System.out.println("Input the data of compared array: ");
         System.out.println("Enter the length of arrays: ");
-        int SecArrLength = sc.nextInt();
-        int[] comparedArr = new int[SecArrLength];
+        int secArrLength = sc.nextInt();
+        int[] secArray = new int[secArrLength];
         System.out.println("Enter the elements of the array: ");
-        for (int i = 0; i < SecArrLength; i++) {
-            comparedArr[i] = sc.nextInt();
+        for (int i = 0; i < secArrLength; i++) {
+            secArray[i] = sc.nextInt();
         }
         System.out.println("Arrays elements are: ");
-        for (int i = 0; i < comparedArr.length; i++) {
-            System.out.print(comparedArr[i] + " ");
+        for (int i = 0; i < secArray.length; i++) {
+            System.out.print(secArray[i] + " ");
         }
         System.out.println();
+
+
     }
 
     public static void freq(int[] userArray) {   
-
+        // initialize a boolean array with the same length as userArray
+        boolean visited[] = new boolean[userArray.length];     
+        java.util.Arrays.fill(visited, false);
+ 
+        // Traverse through array elements and count frequencies
+        for (int i = 0; i < userArray.length; i++) {
+            //skip the visited elements
+            if (visited[i] == true)
+                continue;
+ 
+            // Count frequency
+            int count = 1;
+            for (int j = i + 1; j < userArray.length; j++) {
+                if (userArray[i] == userArray[j]) {
+                    visited[j] = true;
+                    count++;
+                }
+            }
+            System.out.println(userArray[i] + " appears " + count + " time");
+        }
     }
 }
 
