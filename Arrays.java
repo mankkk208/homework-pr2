@@ -95,6 +95,11 @@ public class Arrays {
         sc.close();
     }
 
+    /**
+	 * Count the negative numbers
+	 * @requires userArray is an integer array
+	 * @effects Count then print the negative elements of userArray
+	 */
     public static void countNegatives(int[] userArray) {
         int count = 0;
         for (int i = 0; i < userArray.length; i++) {
@@ -105,6 +110,11 @@ public class Arrays {
         System.out.println("The numbers of negative numbers: " + count);
     }
 
+    /**
+	 * Count the even numbers
+	 * @requires userArray is an array of positive integer numbers.
+	 * @effects Count then print the even numbers of userArray
+	 */
     public static void countEvens(int[] userArray) {
         int count = 0;
         for (int i = 0; i < userArray.length; i++) {
@@ -115,27 +125,41 @@ public class Arrays {
         System.out.println("The numbers of even numbers: " + count);
     }
 
+    /**
+	 * Divide each elements with an input divisor
+	 * @requires an array of real numbers
+	 * @effects 
+	 * 	Get the divisor from the input
+	 * 	Each element is divided by the divisor
+	 * 	Print the array after dividing to the console log
+	 */
     public static void divArray(int[] userArray) {
         System.out.print("Enter a number to divide: ");
         int div = sc.nextInt();
-        //loop through all elements and divide them
         for (int i = 0; i < userArray.length; i++) {
-            System.out.print(userArray[i] / div + " ");
+            System.out.print((double) userArray[i] / div + " ");
         }
     }
 
+    /**
+	 * Compute the minimum elements
+	 * @requires an array of integer numbers
+	 * @effects sort the array then print the first element
+	 */
     public static void min(int[] userArray) {
-        //sort the userArray in ascending order then take the first element
         java.util.Arrays.sort(userArray);
         System.out.println("The minimum element is: " + userArray[0]);
     }
 
+    /**
+	 * Check ascending order
+	 * @requires an array of integer numbers
+	 * @effects Check if the array is in ascending order or not
+	 */
     public static void isAscSorted(int[] userArray) {
-        //initialize a temporary array to hold the sorted version of userArray
-        int[] temp = userArray;
+        int[] temp = userArray.clone();
         java.util.Arrays.sort(userArray);
-        //compare 2 array to see if userArray is in ascending order
-        if (temp == userArray) {
+        if (temp.equals(userArray)) {
             System.out.println("In ascending order!");
         } else {System.out.println("Not in ascending order!");}
     }
@@ -144,12 +168,19 @@ public class Arrays {
         
     }
 
+    /**
+	 * @requires an array of real numbers
+	 * @effects Find the median of the array
+	 */
     public static void median(int[] userArray) {
         int n = userArray.length / 2;
+        java.util.Arrays.sort(userArray);
+        
         if (userArray.length % 2 == 0) {
-            System.out.println("The median elements are: " + userArray[n] + "," + userArray[n + 1]);
+            double m = (double) (userArray[n - 1] +  userArray[n])/2;
+            System.out.println("The median elements are: " + m);
         } else {
-            System.out.println("The median element is: " + userArray[n + 1]);
+            System.out.println("The median element is: " + userArray[n]);
         }
     }
 
@@ -170,19 +201,25 @@ public class Arrays {
 
 
     }
-
+    
+    /**
+	 * Find the frequency of each element
+	 * @requires an array of real numbers
+	 * @effects 
+	 * 	Create a boolean array to check if an element is visited
+	 * 	Loop through the array then count
+	 * 	While in the loop, distinguish the dupplicate element 
+	 * 	in order to not count the same element twice
+	 * 	Print the result to the console log
+	 */
     public static void freq(int[] userArray) {   
-        // initialize a boolean array with the same length as userArray
         boolean visited[] = new boolean[userArray.length];     
         java.util.Arrays.fill(visited, false);
  
-        // Traverse through array elements and count frequencies
         for (int i = 0; i < userArray.length; i++) {
-            //skip the visited elements
             if (visited[i] == true)
                 continue;
- 
-            // Count frequency
+
             int count = 1;
             for (int j = i + 1; j < userArray.length; j++) {
                 if (userArray[i] == userArray[j]) {
